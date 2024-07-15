@@ -1,0 +1,12 @@
+.main-page {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.description {
+  color: white;
+  font-size: 80px;
+}
