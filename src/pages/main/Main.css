@@ -10,3 +10,9 @@
   color: white;
   font-size: 80px;
 }
+
+@media only screen and (max-width: 600px) {
+  .description {
+    font-size: 30px;
+  }
+}
