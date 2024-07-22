@@ -1,11 +1,8 @@
-// import { Router } from '@stricjs/router';
-// import userRoutes from './userRoutes';
-// import postRoutes from './postRoutes';
+import { Hono } from 'hono';
+import { heroesRoutes } from './heroesRoute';
 
-// const router = new Router();
+const hanoRouter = new Hono();
 
-// // Додайте всі інші маршрути до головного маршрутизатора
-// router.use('/users', userRoutes);
-// router.use('/posts', postRoutes);
+hanoRouter.route('api/heroes', heroesRoutes)
 
-// export default router;
+export default hanoRouter;

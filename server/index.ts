@@ -1,9 +1,6 @@
 import { serve } from 'bun';
 import { sequelize } from './config/database';
-import app from './app';
-// import router from './routes';
-
-// const User = require('./models/User');
+import hanoRouter from './routes';
 
 const startServer = async () => {
   try {
@@ -15,7 +12,7 @@ const startServer = async () => {
     console.log('Database & tables created!');
 
     serve({
-        fetch: app.fetch,
+        fetch: hanoRouter.fetch,
         port: 3000,
     });
 
