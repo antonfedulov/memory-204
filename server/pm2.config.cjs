@@ -1,5 +1,5 @@
 module.exports = {
     name: "memory204",
     script: "index.ts", 
-    interpreter: "~/.bun/bin/bun",
+    interpreter: "/root/.bun/bin/bun",
 };
