@@ -2,13 +2,31 @@
   height: 100vh;
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.header-img {
+  height: 16rem;
+}
+
+.header-img.book {
+  height: 56rem;
+  cursor: pointer;
 }
 
 .description {
   color: white;
-  font-size: 80px;
+  margin-top: 4rem;
+  font-size: 4rem;
+  text-align: center;
 }
 
 @media only screen and (max-width: 600px) {
