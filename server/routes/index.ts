@@ -3,6 +3,6 @@ import { heroesRoutes } from './heroesRoute';
 
 const hanoRouter = new Hono();
 
-hanoRouter.route('api/heroes', heroesRoutes)
+hanoRouter.route('/heroes', heroesRoutes)
 
 export default hanoRouter;
