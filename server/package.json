@@ -13,6 +13,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@sequelize/core": "^7.0.0-alpha.37",
     "@stricjs/router": "^5.0.6",
     "@stricjs/utils": "^2.0.7",
     "hono": "^4.5.1",
