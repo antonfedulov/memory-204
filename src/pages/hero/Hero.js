@@ -17,7 +17,7 @@ function Hero() {
   useEffect(() => {
     const fetchHero = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/heroes/${id}`);
+        const response = await axios.get(`https://memory-204.biz.ua/api/heroes/${id}`);
         setUrlState(response?.data?.Photo ?? '');
         setHeroState({...response.data});
       } catch (error) {

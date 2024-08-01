@@ -65,7 +65,7 @@ function HeroCreateEdit() {
     formReqData.append('Photo', formData.Photo);
 
 
-    const response = await axios.post('http://localhost:4000/heroes/create', formReqData, {
+    const response = await axios.post('https://memory-204.biz.ua/api/heroes/create', formReqData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }

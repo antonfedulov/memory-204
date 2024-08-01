@@ -19,7 +19,7 @@ function Admin() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 //https://memory-204.biz.ua/api/admin
-    const response = await axios.post(`http://localhost:4000/admin`,
+    const response = await axios.post(`https://memory-204.biz.ua/api/admin`,
       { 
         login: loginValue,
         password: passwordValue 
