@@ -67,6 +67,14 @@
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
+    position: relative;
+  
+    .brigada {
+      position: absolute;
+      height: 15rem;
+      cursor: pointer;
+    }
+
     .hero-page-bottom-reward {
       font-size: 3rem;
       font-style: italic;

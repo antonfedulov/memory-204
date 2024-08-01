@@ -2,10 +2,12 @@ import './HeroCreateEdit.scss';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function HeroCreateEdit() {
   const navigator = useNavigate();
+  const location = useLocation();
+
   const ranks = [
     { id: 1, value: 'cолдат' },
     { id: 2, value: 'cтарший солдат' },
@@ -29,10 +31,12 @@ function HeroCreateEdit() {
   ];
 
   const [isFormValid, setIsFormValid] = useState(false);
+  const [isEditMode, setStateMode] = useState(false);
+  const [order, setOrder] = useState(0);
 
   const [formData, setFormData] = useState({
     PIP: '',
-    Rank: 4,
+    Rank: 1,
     Position: '',
     Description: '',
     Reward: '',
@@ -44,6 +48,35 @@ function HeroCreateEdit() {
     const isValid = fields.every(field => !!formData[field]);
     setIsFormValid(isValid);
   }, [formData]);
+
+  useEffect(() => {
+    const order = location?.state?.key;
+    order && setOrder(order);
+    
+    const fetchHero = async () => {
+      try {
+        const response = await axios.get(`https://memory-204.biz.ua/api/heroes/${order}`);
+        if (response?.data) {
+          const Rank = ranks.find((rank) => rank.value === response?.data.Rank)?.id && 1;
+          setFormData({
+            PIP: response?.data.PIP,
+            Rank,
+            Position: response?.data.Position,
+            Description: response?.data.Description,
+            Reward: response?.data.Reward,
+            Photo: null,
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching hero:', error);
+      }
+    };
+
+    if (order) {
+      setStateMode(true);
+      fetchHero();
+    }  
+  }, [location?.state?.key]);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -65,11 +98,22 @@ function HeroCreateEdit() {
     formReqData.append('Photo', formData.Photo);
 
 
-    const response = await axios.post('https://memory-204.biz.ua/api/heroes/create', formReqData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    });
+    let response
+    if (!isEditMode) {
+      response = await axios.post('https://memory-204.biz.ua/api/heroes/create', formReqData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+    } else {
+      formReqData.append('Order', order);
+      response = await axios.post('https://memory-204.biz.ua/api/heroes/update', formReqData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+    }
+    
     
     if (response.data && response.data.isCreated) {
       const heroOrder = response.data.hero?.Order;
@@ -149,7 +193,15 @@ function HeroCreateEdit() {
             className='add-button'
             onClick={handleSubmit}
           >
-            Додати героя
+            {isEditMode ? 'Оновити дані героя' : 'Додати героя'}
+          </Button>
+          <Button
+            variant="secondary"
+            type="button"
+            className='add-button'
+            onClick={() => navigator(`/heroes/list`)}
+          >
+            Перейти до списку
           </Button>
         </Form>
       </div>

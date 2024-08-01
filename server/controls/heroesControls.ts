@@ -31,9 +31,42 @@ export async function addHero(data: HeroData) {
   }
 }
 
+export async function updateHero(data: HeroData) {
+  const transaction = await sequelize.transaction();
+  try {
+    const hero = await Hero.findOne({ where: { Order: data.Order } });
+
+    if (!hero) {
+      return null;
+    }
+
+    const newHero = await hero.update(data);
+    await transaction.commit();
+    return newHero;
+  } catch (error) {
+    await transaction.rollback();
+    console.error('Error creating hero:', error);
+    return null;
+  }
+}
+
 export async function getHeroes(): Promise<HeroData[]> {
   try {
     const heroes = await Hero.findAll({attributes: ['Order', 'Photo']});
+
+    if (!heroes) {
+      return [] as HeroData[];
+    }
+    return !!heroes && heroes !== null ? heroes : {} as HeroData[];
+  } catch (error) {
+    console.error('Error not found hero:', error);
+    return [] as HeroData[];
+  }
+}
+
+export async function getEditHeroes(): Promise<HeroData[]> {
+  try {
+    const heroes = await Hero.findAll({attributes: ['Order', 'PIP']});
 
     if (!heroes) {
       return [] as HeroData[];

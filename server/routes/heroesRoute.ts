@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import { addHero, getHero, getHeroes, type HeroData } from '../controls/heroesControls';
+import { addHero, getEditHeroes, getHero, getHeroes, updateHero, type HeroData } from '../controls/heroesControls';
 import { parseFormData } from '.';
 
 export const heroesRoutes = new Hono()
@@ -16,6 +16,16 @@ export const heroesRoutes = new Hono()
       })
 
       return c.json(mappedHeroes);
+  
+    } catch (error) {
+      console.error('Error fetching hero:', error);
+      return c.json({ message: 'Internal server error' }, 500);
+    }
+  })
+  .get('/edit-list', async (c) => {
+    try {
+      const heroes: HeroData[] = await getEditHeroes();
+      return c.json(heroes);
   
     } catch (error) {
       console.error('Error fetching hero:', error);
@@ -59,6 +69,38 @@ export const heroesRoutes = new Hono()
       const photoBuffer = Buffer.from(photoArrayBuffer);
 
       const newHero = await addHero({
+        PIP,
+        Rank,
+        Description,
+        Reward,
+        Position,
+        Photo: photoBuffer
+      } as HeroData);
+
+      if (newHero) {
+        return c.json({ message: 'Hero created successfully', isCreated: true, hero: newHero }, 201);
+      } else {
+        return c.json({ isCreated: false }, 200);
+      }
+    } catch (error) {
+      return c.json({ isCreated: false }, 200);
+    }
+  })
+  .put('/update', async (c) => {
+    try {
+      const { fields, files } = await parseFormData(c.req);
+      const { PIP, Rank, Description, Reward, Position, Order } = fields;
+      const photoBlob = files['Photo'] as Blob;
+  
+      if (!PIP || !Rank || !Description || !Reward || !Position || !photoBlob) {
+        return c.json({ message: 'All fields are required' }, 400);
+      }
+  
+      const photoArrayBuffer = await photoBlob.arrayBuffer();
+      const photoBuffer = Buffer.from(photoArrayBuffer);
+
+      const newHero = await updateHero({
+        Order,
         PIP,
         Rank,
         Description,

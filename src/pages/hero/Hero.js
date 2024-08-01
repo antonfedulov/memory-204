@@ -1,10 +1,12 @@
 import './Hero.scss';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Hero() {
   const { id } = useParams();
+  const navigate = useNavigate();
+  
   const [urlState, setUrlState] = useState('');
   const [heroState, setHeroState] = useState({
     PIP: '',
@@ -28,6 +30,10 @@ function Hero() {
     fetchHero();
   }, [id]);
 
+  const brigadaClickHandler = () => {
+    navigate('/heroes');
+  }
+
 
   return (heroState.PIP &&
     <div className='hero-page' style={{
@@ -48,6 +54,7 @@ function Hero() {
         </div>
       </div>
       <div className='hero-page-bottom'>
+        <img className='brigada' src={process.env.PUBLIC_URL + '/hero/204brigada.png'} alt="Hero" onClick={() => brigadaClickHandler()} />
         <div className='hero-page-bottom-reward'>{heroState.Reward}</div>
       </div>
     </div>

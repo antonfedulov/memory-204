@@ -5,6 +5,7 @@ import Heroes from './pages/heroes/Heroes';
 import HeroCreateEdit from './pages/hero-create-edit/HeroCreateEdit';
 import Main from './pages/main/Main';
 import Admin from './pages/admin/Admin';
+import HeroesList from './pages/heroes-list/HeroesList';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/heroes" element={<Heroes />} />
       <Route path="/heroes/:id" element={<Hero />} />
       <Route path="/heroes/create" element={<HeroCreateEdit />} />
+      <Route path="/heroes/list" element={<HeroesList />} />
     </Routes>
   );
 }
