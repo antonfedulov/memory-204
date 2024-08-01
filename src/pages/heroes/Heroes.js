@@ -29,7 +29,7 @@ function Heroes() {
   return (
     <div className='heroes-page'>
       <div className='heroes-page-list'>
-        {heroList.length && heroList.map(hero => <img className='hero' src={hero.Photo} alt="Hero" onClick={() => heroClickHandler(hero.Order)} />)}
+        {heroList.length && heroList.map(hero => <img className='hero' src={hero.Photo} alt="Hero" key={hero.Order} onClick={() => heroClickHandler(hero.Order)} />)}
       </div>
     </div>
   );
