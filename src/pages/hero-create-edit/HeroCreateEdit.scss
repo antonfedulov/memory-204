@@ -1,4 +1,21 @@
 .hero-create-edit-page {
   height: 100vh;
   width: 100%;
+  overflow: hidden;
+
+  .hero-create-form {
+    width: 60%;
+    margin: 10vh auto;
+    .form {
+      font-size: 2rem;
+      .form-select,.form-control {
+        font-size: 2rem;
+      }
+      .add-button {
+        width: 25%;
+        height: 4rem;
+        font-size: 2rem;
+      }
+    }
+  }
 }

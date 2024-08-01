@@ -1,6 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/database';
-import { sql } from '@sequelize/core';
 
 class Hero extends Model {
   public id!: number;
@@ -11,8 +10,8 @@ class Hero extends Model {
 Hero.init(
   {
     Id: {
-      type: DataTypes.UUIDV4,
-      defaultValue: sql.uuidV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
     Order: {
@@ -34,6 +33,10 @@ Hero.init(
     Reward: {
       type: new DataTypes.TEXT,
       allowNull: false,
+    },
+    Position: {
+      type: new DataTypes.TEXT,
+      allowNull: false
     },
     Photo: {
       type: new DataTypes.BLOB('medium'),

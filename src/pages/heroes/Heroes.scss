@@ -1,0 +1,14 @@
+.heroes-page {
+  width: 100%;
+  padding: 2rem;
+  .heroes-page-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .hero {
+      height: 16rem;
+      width: 12rem;
+    }
+  }
+}

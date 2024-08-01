@@ -1,6 +1,23 @@
-import { Hono } from 'hono';
+import { Hono, type HonoRequest } from 'hono';
 import { heroesRoutes } from './heroesRoute';
 import { adminRoutes } from './adminRoutes';
+
+
+export const parseFormData = async (request: HonoRequest): Promise<any> => {
+  const formData = await request.formData();
+  const fields: any = {};
+  const files: any = {};
+
+  formData.forEach((value, key) => {
+    if (value instanceof Blob) {
+      files[key] = value;
+    } else {
+      fields[key] = value;
+    }
+  });
+
+  return { fields, files };
+};
 
 const cors = (options = {}) => {
     const defaults = {
