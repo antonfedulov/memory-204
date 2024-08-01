@@ -13,7 +13,7 @@ const startServer = async () => {
 
     serve({
         fetch: hanoRouter.fetch,
-        port: 4000,
+        port: 3000,
     });
 
     console.log('Server is running on port 3000');
