@@ -37,7 +37,7 @@ function Heroes() {
         <img className='book-text' src={process.env.PUBLIC_URL + '/heroes/book-text.jpg'} alt="book-text" />
       </div>
       <div className='heroes-page-list'>
-        {heroList.length ? heroList.map(hero => {
+        {heroList.length ? heroList.sort((a, b) => +a.Order - +b.Order).map(hero => {
           return (
             <div className='hero-wrapper' key={hero.Order} onClick={() => heroClickHandler(hero.Order)}>
               <img className='hero' src={hero.Photo} alt="Hero" />
