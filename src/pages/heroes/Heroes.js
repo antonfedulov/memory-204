@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import * as rdd from 'react-device-detect';
+import Spinner from 'react-bootstrap/Spinner';
 
 
 function Heroes() {
@@ -36,14 +37,14 @@ function Heroes() {
         <img className='book-text' src={process.env.PUBLIC_URL + '/heroes/book-text.jpg'} alt="book-text" />
       </div>
       <div className='heroes-page-list'>
-        {heroList.length && heroList.map(hero => {
+        {heroList.length ? heroList.map(hero => {
           return (
             <div className='hero-wrapper' key={hero.Order} onClick={() => heroClickHandler(hero.Order)}>
               <img className='hero' src={hero.Photo} alt="Hero" />
               <div className='hero-overlay'></div>
             </div>
           )
-        })}
+        }) : (<Spinner animation="border" variant="light" size="sm" />)}
       </div>
     </div>
   );

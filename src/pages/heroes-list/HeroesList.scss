@@ -10,5 +10,8 @@
   .action-btn {
     text-align: center;
     cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
 }

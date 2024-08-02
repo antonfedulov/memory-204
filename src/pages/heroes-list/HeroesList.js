@@ -9,8 +9,6 @@ function HeroesList() {
   const navigate = useNavigate();
   const [heroList, setHeroList] = useState([]);
 
-
-
   useEffect(() => {
     const fetchHeroes = async () => {
       try {
@@ -25,6 +23,15 @@ function HeroesList() {
 
     fetchHeroes();
   }, []);
+
+
+  const onRemoveHandle = async (order) => {
+    const response = await axios.delete('https://memory-204.biz.ua/api/heroes/delete', { order });
+
+    if (response.data && response.data.isRemoved) {
+      setHeroList(response.data.heroes);
+    }
+  }
 
 
   return (
@@ -45,6 +52,7 @@ function HeroesList() {
                 <th>{hero.PIP}</th>
                 <th className='action-btn'>
                   <i className="bi bi-pencil-square" onClick={() => navigate('/heroes/create', { state: { key: hero.Order } })}></i>
+                  <i className="bi bi-file-earmark-x-fill" onClick={() => onRemoveHandle(hero.Order)}></i>
                 </th>
               </tr>
             )

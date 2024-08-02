@@ -94,3 +94,21 @@ export async function getHero(Order: number): Promise<HeroData> {
     return {} as HeroData;
   }
 }
+
+export async function removeHero(Order: number): Promise<boolean> {
+  const transaction = await sequelize.transaction();
+  try {
+    const hero = await Hero.findOne({ where: { Order } });
+    let result
+    if (hero) {
+      result = await hero.destroy({ transaction });
+    }
+    console.log(result)
+    await transaction.commit();
+    return true;
+  } catch (error) {
+    console.error('Error not found hero:', error);
+    await transaction.rollback();
+    return false;
+  }
+}

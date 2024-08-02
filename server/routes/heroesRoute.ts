@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import { addHero, getEditHeroes, getHero, getHeroes, updateHero, type HeroData } from '../controls/heroesControls';
+import { addHero, getEditHeroes, getHero, getHeroes, removeHero, updateHero, type HeroData } from '../controls/heroesControls';
 import { parseFormData } from '.';
 
 export const heroesRoutes = new Hono()
@@ -116,5 +116,20 @@ export const heroesRoutes = new Hono()
       }
     } catch (error) {
       return c.json({ isCreated: false }, 200);
+    }
+  })
+  .delete('/delete', async (c) => {
+    try {
+      const body = await c.req.parseBody();
+
+      if (body.order) {
+        const result = await removeHero(+body.order);
+        const heroes: HeroData[] = await getEditHeroes();
+        return c.json({ message: 'Hero removed from list', isRemoved: true, heroes: heroes }, 201);
+      } else {
+        return c.json({ isRemoved: false }, 200);
+      }
+    } catch (error) {
+      return c.json({ isRemoved: false }, 200);
     }
   })
