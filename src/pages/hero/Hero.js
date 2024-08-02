@@ -11,11 +11,11 @@ function Hero() {
   const classDevice = isMobile ? 'is-phone' : 'is-pc';
   
   const [urlState, setUrlState] = useState('');
+  const [descriptionState, setDescriptionState] = useState([]);
+  const [rewardState, setRewardState] = useState([]);
   const [heroState, setHeroState] = useState({
     PIP: '',
     Rank: '',
-    Description: '',
-    Reward: '',
     Position: ''
   });
 
@@ -24,7 +24,20 @@ function Hero() {
       try {
         const response = await axios.get(`https://memory-204.biz.ua/api/heroes/${id}`);
         setUrlState(response?.data?.Photo ?? '');
-        setHeroState({...response.data});
+        if (response?.data) {
+          setHeroState({
+            PIP: response.data.PIP,
+            Rank: response.data.Rank,
+            Position: response.data.Position
+          });
+        }
+
+        if (response?.data) {
+          const descriptions = response.data.Description?.split('$');
+          const rewards = response.data.Reward?.split('$');
+          setDescriptionState(descriptions);
+          setRewardState(rewards);
+        }
       } catch (error) {
         console.error('Error fetching hero:', error);
       }
@@ -48,17 +61,21 @@ function Hero() {
       <div className='hero-page-top'>
         <div className='hero-page-top-left'>
           <img className='hero-page-top-photo' src={urlState} alt="Hero" />
-          <div className='hero-page-top-rank'>{heroState.Rank}</div>
-          <div className='hero-page-top-pip'>{heroState.PIP}</div>
+          <div className='hero-page-top-rank' translate="no">{heroState.Rank}</div>
+          <div className='hero-page-top-pip' translate="no">{heroState.PIP}</div>
         </div>
         <div className='hero-page-top-right'>
-          <div className='hero-page-top-position'>{heroState.Position}</div>
-          <div className='hero-page-top-description'>{heroState.Description}</div>
+          <div className='hero-page-top-position' translate="no">{heroState.Position}</div>
+          <div className='hero-page-top-description' translate="no">{descriptionState.length && descriptionState.map((p) => {
+            return (<p className='description-p'>{p}</p>)
+          })}</div>
         </div>
       </div>
       <div className='hero-page-bottom'>
         <img className='brigada' src={process.env.PUBLIC_URL + '/hero/204brigada.png'} alt="Hero" onClick={() => brigadaClickHandler()} />
-        <div className='hero-page-bottom-reward'>{heroState.Reward}</div>
+        <div className='hero-page-bottom-reward' translate="no">{rewardState.length && rewardState.map((p) => {
+          return (<p className='reward-p'>{p}</p>)
+        })}</div>
       </div>
     </div>
   );

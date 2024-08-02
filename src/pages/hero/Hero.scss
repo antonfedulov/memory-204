@@ -1,5 +1,5 @@
 .hero-page {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   overflow: auto;
   padding: 2rem;
@@ -15,6 +15,7 @@
 
       .hero-page-top-photo {
         height: 85rem;
+        filter: drop-shadow(0 0 0.75rem rgb(97, 106, 231));
       }
       .hero-page-top-rank {
         width: 100%;
@@ -29,7 +30,7 @@
     }
     .hero-page-top-rank, .hero-page-top-pip {
       letter-spacing: 8px;
-      color: #2E5BD5;
+      color: #123aa5;
       line-height:1em;
       font-weight: 900;
       text-shadow: 0 0 10px #FFFFFF, 2px 2px 2px rgba(132,155,206,0);
@@ -58,6 +59,13 @@
         font-weight: 700;
         line-height: 5rem;
         font-family: sans-serif;
+        padding-left: 2rem;
+
+        .description-p {
+          text-align: justify;
+          text-indent: 8rem;
+          margin: 0;
+        }
       }
     }
   }
@@ -67,6 +75,7 @@
     justify-content: flex-end;
     flex-direction: column;
     position: relative;
+    margin-top: 4rem;
   
     .brigada {
       position: absolute;
@@ -75,7 +84,7 @@
     }
 
     .hero-page-bottom-reward {
-      font-size: 3rem;
+      font-size: 4rem;
       font-style: italic;
       width: 80%;
       margin: 0 auto;
@@ -84,6 +93,10 @@
       font-weight: 600;
       text-shadow: #FC0 1px 0 10px;
       line-height: normal;
+
+      .reward-p {
+        margin-bottom: 4rem;
+      }
     }
   }
 
@@ -95,14 +108,17 @@
       align-items: center;
 
       .hero-page-top-left {
+        position: relative;
         width: 100%;
 
         .hero-page-top-pip {
           margin-bottom: 2rem;
+          z-index: 10;
         }
 
         .hero-page-top-rank {
           margin-top: 2rem;
+          z-index: 10;
         }
       }
       .hero-page-top-right {
@@ -112,8 +128,12 @@
         .hero-page-top-description {
           margin-top: 1rem;
           text-align: justify;
+          padding-left: 0;
         }
       }
+    }
+    .hero-page-bottom-reward {
+      font-size: 4.5rem;
     }
   }    
 }

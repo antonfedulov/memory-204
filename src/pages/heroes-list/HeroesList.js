@@ -33,9 +33,9 @@ function HeroesList() {
     }
   }
 
-
   return (
     <div className='heroes-page-list'>
+      <i className="bi bi-house-door home-icon" onClick={() => navigate('/')}></i>
       <Table striped bordered hover variant="dark">
         <thead>
           <tr className='table-header-row'>
@@ -45,7 +45,7 @@ function HeroesList() {
           </tr>
         </thead>
         <tbody>
-          {heroList.length && heroList.map((hero) => {
+          {heroList.length && heroList.sort((a, b) => +a.Order - +b.Order).map((hero) => {
             return (
               <tr key={hero.Order}>
                 <th>{hero.Order}</th>
@@ -59,7 +59,6 @@ function HeroesList() {
           })}
       </tbody>
       </Table>
-      
     </div>
   );
 }

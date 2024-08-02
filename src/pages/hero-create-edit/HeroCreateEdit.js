@@ -123,6 +123,7 @@ function HeroCreateEdit() {
 
   return (
     <div className='hero-create-edit-page'>
+      <i className="bi bi-house-door home-icon" onClick={() => navigator('/')}></i>
       <div className='hero-create-form'>
         <Form className='form'>
           <Form.Group className="mb-3">

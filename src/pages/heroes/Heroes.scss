@@ -39,9 +39,22 @@
       background-color: #fff;
       z-index: 10;
       cursor: pointer;
-      opacity: 0.7;
+      opacity: 0.5;
       &:hover {
         opacity: 0;
+      }
+    }
+  }
+
+  &.is-pc {
+    .heroes-page-list {
+      
+      .spinner-border-sm {
+        --bs-spinner-width: 20rem;
+        --bs-spinner-height: 20rem;
+        --bs-spinner-border-width: 0.8em;
+        opacity: 0.6;
+        margin: auto;
       }
     }
   }
