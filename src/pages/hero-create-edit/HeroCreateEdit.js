@@ -57,7 +57,7 @@ function HeroCreateEdit() {
       try {
         const response = await axios.get(`https://memory-204.biz.ua/api/heroes/${order}`);
         if (response?.data) {
-          const Rank = ranks.find((rank) => rank.value === response?.data.Rank)?.id && 1;
+          const Rank = ranks.find((rank) => rank.value === response?.data.Rank)?.id ?? 1;
           setFormData({
             PIP: response?.data.PIP,
             Rank,
@@ -107,7 +107,7 @@ function HeroCreateEdit() {
       });
     } else {
       formReqData.append('Order', order);
-      response = await axios.post('https://memory-204.biz.ua/api/heroes/update', formReqData, {
+      response = await axios.put('https://memory-204.biz.ua/api/heroes/update', formReqData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
