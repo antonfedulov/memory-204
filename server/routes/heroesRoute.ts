@@ -108,7 +108,6 @@ export const heroesRoutes = new Hono()
         Position,
         Photo: photoBuffer
       } as HeroData);
-
       if (newHero) {
         return c.json({ message: 'Hero created successfully', isCreated: true, hero: newHero }, 201);
       } else {
