@@ -147,7 +147,7 @@ function HeroCreateEdit() {
             <Form.Control
               name="Position"
               type="text"
-              maxLength="200"
+              maxLength="250"
               required
               value={formData.Position}
               onChange={handleChange}
