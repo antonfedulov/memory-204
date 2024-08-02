@@ -7,8 +7,9 @@
   overflow: hidden;
 
   &.is-phone {
-    width: 94%;
+    width: 100%;
     margin: auto;
+    overflow: auto;
     .header {
       .book {
         height: 80rem;

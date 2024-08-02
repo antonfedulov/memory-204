@@ -1,7 +1,7 @@
 .hero-page {
   height: 100vh;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
   padding: 2rem;
 
   .hero-page-top {
@@ -96,11 +96,22 @@
 
       .hero-page-top-left {
         width: 100%;
+
+        .hero-page-top-pip {
+          margin-bottom: 2rem;
+        }
+
+        .hero-page-top-rank {
+          margin-top: 2rem;
+        }
       }
       .hero-page-top-right {
+        .hero-page-top-position {
+          margin-bottom: 2rem;
+        }
         .hero-page-top-description {
           margin-top: 1rem;
-          text-align: left;
+          text-align: justify;
         }
       }
     }
