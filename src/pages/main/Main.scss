@@ -5,6 +5,17 @@
   align-items: flex-start;
   flex-direction: column;
   overflow: hidden;
+
+  &.is-phone {
+    .header {
+      .book {
+        height: 80rem;
+      }
+    }
+    .description {
+      margin-top: 18rem;
+    }
+  }
 }
 
 .header {
