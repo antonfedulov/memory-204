@@ -26,7 +26,7 @@ function HeroesList() {
 
 
   const onRemoveHandle = async (order) => {
-    const response = await axios.delete('https://memory-204.biz.ua/api/heroes/delete', { order });
+    const response = await axios.delete(`https://memory-204.biz.ua/api/heroes/delete/${order}`);
 
     if (response.data && response.data.isRemoved) {
       setHeroList(response.data.heroes);

@@ -118,12 +118,12 @@ export const heroesRoutes = new Hono()
       return c.json({ isCreated: false }, 200);
     }
   })
-  .delete('/delete', async (c) => {
+  .delete('/delete/:order', async (c) => {
     try {
-      const body = await c.req.parseBody();
+      const { order } = await c.req.param();
 
-      if (body.order) {
-        const result = await removeHero(+body.order);
+      if (!!order) {
+        const result = await removeHero(+order);
         const heroes: HeroData[] = await getEditHeroes();
         return c.json({ message: 'Hero removed from list', isRemoved: true, heroes: heroes }, 201);
       } else {
