@@ -43,4 +43,19 @@
       }
     }
   }
+
+  &.is-phone {
+    flex-direction: column;
+    height: 100%;
+
+    .heroes-page-list {
+      padding: 0;
+      margin: 0;
+
+      .hero-wrapper {
+        height: 24rem;
+        width: 18rem;
+      }
+    }
+  }
 }

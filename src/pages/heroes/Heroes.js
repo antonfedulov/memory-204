@@ -2,11 +2,14 @@ import './Heroes.scss';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import * as rdd from 'react-device-detect';
 
 
 function Heroes() {
+  const { isMobile } = rdd;
   const navigate = useNavigate();
   const [heroList, setHeroList] = useState([]);
+  const classDevice = isMobile ? 'is-phone' : 'is-pc';
 
   useEffect(() => {
     const fetchHeroes = async () => {
@@ -27,7 +30,7 @@ function Heroes() {
   }
 
   return (
-    <div className='heroes-page'>
+    <div className={'heroes-page ' + classDevice}>
       <div className='heroes-page-left-side'>
         <img className='book' src={process.env.PUBLIC_URL + '/heroes/book.jpg'} alt="book" onClick={() => navigate(`/`)} />
         <img className='book-text' src={process.env.PUBLIC_URL + '/heroes/book-text.jpg'} alt="book-text" />

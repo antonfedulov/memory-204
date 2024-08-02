@@ -87,4 +87,22 @@
       line-height: normal;
     }
   }
+
+  &.is-phone {
+    height: 100%;
+    overflow: auto;
+    .hero-page-top {
+      flex-direction: column;
+      align-items: center;
+
+      .hero-page-top-left {
+        width: 100%;
+      }
+      .hero-page-top-right {
+        .hero-page-top-description {
+          margin-top: 1rem;
+        }
+      }
+    }
+  }    
 }

@@ -2,10 +2,13 @@ import './Hero.scss';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from "react-router-dom";
+import * as rdd from 'react-device-detect';
 
 function Hero() {
+  const { isMobile } = rdd;
   const { id } = useParams();
   const navigate = useNavigate();
+  const classDevice = isMobile ? 'is-phone' : 'is-pc';
   
   const [urlState, setUrlState] = useState('');
   const [heroState, setHeroState] = useState({
@@ -36,7 +39,7 @@ function Hero() {
 
 
   return (heroState.PIP &&
-    <div className='hero-page' style={{
+    <div className={'hero-page ' + classDevice} style={{
       backgroundImage: `url("${process.env.PUBLIC_URL}/hero/hero-background.jpg")`,
       backgroundPosition: 'center',
       backgroundSize: 'cover',
