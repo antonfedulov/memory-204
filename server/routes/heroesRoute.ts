@@ -1,21 +1,32 @@
 import { Hono } from 'hono';
 import { addHero, getEditHeroes, getHero, getHeroes, removeHero, updateHero, type HeroData } from '../controls/heroesControls';
 import { parseFormData } from '.';
+import { compress } from '../utils/compress';
 
 export const heroesRoutes = new Hono()
   .get('/list', async (c) => {
     try {
       const heroes: HeroData[] = await getHeroes();
  
-      const mappedHeroes = heroes.map((hero) => {
-        const Order = hero.Order;
-        const photoBase64 = hero.Photo.toString('base64');
-        const photoMimeType = 'image/jpeg';
-        const Photo = `data:${photoMimeType};base64,${photoBase64}`;
-        return { Order, Photo };
-      })
+      // const mappedHeroes = heroes.map((hero) => {
+      //   const Order = hero.Order;
+      //   const photoBase64 = hero.Photo.toString('base64');
+      //   const photoMimeType = 'image/jpeg';
+      //   const Photo = `data:${photoMimeType};base64,${photoBase64}`;
+      //   return { Order, Photo };
+      // })
 
-      return c.json(mappedHeroes);
+      const compressedPhotos = await Promise.all(
+        heroes.map(async (hero) => {
+          const compressedBuffer = await compress(hero.Photo);
+          return {
+            Order: hero.Order,
+            Photo: `data:image/jpeg;base64,${compressedBuffer.toString('base64')}`,
+          };
+        })
+      );
+
+      return c.json(compressedPhotos);
   
     } catch (error) {
       console.error('Error fetching hero:', error);

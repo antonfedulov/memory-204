@@ -15,7 +15,8 @@ function Heroes() {
   useEffect(() => {
     const fetchHeroes = async () => {
       try {
-        const response = await axios.get(`https://memory-204.biz.ua/api/heroes/list`);
+        //https://memory-204.biz.ua/api/heroes/list
+        const response = await axios.get(`http://localhost:4000/heroes/list`);
         
         setHeroList(response?.data ?? []);
       } catch (error) {
