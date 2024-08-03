@@ -9,6 +9,7 @@ export interface HeroData {
   Reward: string;
   Position: string;
   Photo: Buffer;
+  Title: string;
 }
 
 export async function addHero(data: HeroData) {

@@ -7,14 +7,6 @@ export const heroesRoutes = new Hono()
   .get('/list', async (c) => {
     try {
       const heroes: HeroData[] = await getHeroes();
- 
-      // const mappedHeroes = heroes.map((hero) => {
-      //   const Order = hero.Order;
-      //   const photoBase64 = hero.Photo.toString('base64');
-      //   const photoMimeType = 'image/jpeg';
-      //   const Photo = `data:${photoMimeType};base64,${photoBase64}`;
-      //   return { Order, Photo };
-      // })
 
       const compressedPhotos = await Promise.all(
         heroes.map(async (hero) => {
@@ -58,7 +50,8 @@ export const heroesRoutes = new Hono()
         Description: hero.Description,
         Reward: hero.Reward,
         Position: hero.Position,
-        Photo: `data:${photoMimeType};base64,${photoBase64}`
+        Photo: `data:${photoMimeType};base64,${photoBase64}`,
+        Title: hero.Title
       });
   
     } catch (error) {
@@ -69,7 +62,7 @@ export const heroesRoutes = new Hono()
   .post('/create', async (c) => {
     try {
       const { fields, files } = await parseFormData(c.req);
-      const { PIP, Rank, Description, Reward, Position } = fields;
+      const { PIP, Rank, Description, Reward, Position, Title } = fields;
       const photoBlob = files['Photo'] as Blob;
   
       if (!PIP || !Rank || !Description || !Reward || !Position || !photoBlob) {
@@ -85,7 +78,8 @@ export const heroesRoutes = new Hono()
         Description,
         Reward,
         Position,
-        Photo: photoBuffer
+        Photo: photoBuffer,
+        Title
       } as HeroData);
 
       if (newHero) {
@@ -100,7 +94,7 @@ export const heroesRoutes = new Hono()
   .put('/update', async (c) => {
     try {
       const { fields, files } = await parseFormData(c.req);
-      const { PIP, Rank, Description, Reward, Position, Order } = fields;
+      const { PIP, Rank, Description, Reward, Position, Order, Title } = fields;
       const photoBlob = files['Photo'] as Blob;
   
       if (!PIP || !Rank || !Description || !Reward || !Position || !photoBlob) {
@@ -117,7 +111,8 @@ export const heroesRoutes = new Hono()
         Description,
         Reward,
         Position,
-        Photo: photoBuffer
+        Photo: photoBuffer,
+        Title
       } as HeroData);
       if (newHero) {
         return c.json({ message: 'Hero created successfully', isCreated: true, hero: newHero }, 201);
