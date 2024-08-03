@@ -1,8 +1,12 @@
 import sharp from 'sharp';
 
 export async function compress(buffer) {
+  if (!buffer || buffer.length === 0) {
+    throw new Error('Invalid input: Buffer is empty');
+  }
+  
   return sharp(buffer)
-    .resize(800) // Зміна розміру, наприклад, до 800px в ширину
-    .jpeg({ quality: 70 }) // Збереження у формат JPEG з якістю 70%
+    .resize(800)
+    .jpeg({ quality: 40 })
     .toBuffer();
 }

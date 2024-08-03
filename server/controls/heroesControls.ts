@@ -54,7 +54,7 @@ export async function updateHero(data: HeroData) {
 export async function getHeroes(): Promise<HeroData[]> {
   try {
     const heroes = await Hero.findAll({attributes: ['Order', 'Photo']});
-
+    
     if (!heroes) {
       return [] as HeroData[];
     }
