@@ -16,7 +16,8 @@ function Hero() {
   const [heroState, setHeroState] = useState({
     PIP: '',
     Rank: '',
-    Position: ''
+    Position: '',
+    Title: ''
   });
 
   useEffect(() => {
@@ -28,7 +29,8 @@ function Hero() {
           setHeroState({
             PIP: response.data.PIP,
             Rank: response.data.Rank,
-            Position: response.data.Position
+            Position: response.data.Position,
+            Title: response.data.Title
           });
         }
 
@@ -61,6 +63,7 @@ function Hero() {
       <div className='hero-page-top'>
         <div className='hero-page-top-left'>
           <img className='hero-page-top-photo' src={urlState} alt="Hero" />
+          {heroState.Title && <div className='hero-page-top-title' translate="no">{heroState.Title}</div>}
           <div className='hero-page-top-rank' translate="no">{heroState.Rank}</div>
           <div className='hero-page-top-pip' translate="no">{heroState.PIP}</div>
         </div>

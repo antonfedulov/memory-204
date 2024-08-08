@@ -41,10 +41,11 @@ function HeroCreateEdit() {
     Description: '',
     Reward: '',
     Photo: null,
+    Title: ''
   });
 
   useEffect(() => {
-    const fields = Object.keys(formData || []);
+    const fields = Object.keys(formData || []).filter((field => field !== 'Title'));
     const isValid = fields.every(field => !!formData[field]);
     setIsFormValid(isValid);
   }, [formData]);
@@ -65,6 +66,7 @@ function HeroCreateEdit() {
             Description: response?.data.Description,
             Reward: response?.data.Reward,
             Photo: null,
+            Title: response?.data.Title
           });
         }
       } catch (error) {
@@ -96,6 +98,7 @@ function HeroCreateEdit() {
     formReqData.append('Reward', formData.Reward);
     formReqData.append('Position', formData.Position);
     formReqData.append('Photo', formData.Photo);
+    formReqData.append('Title', formData.Title);
 
 
     let response
@@ -139,6 +142,16 @@ function HeroCreateEdit() {
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Звання</Form.Label>
+            <Form.Control
+              type="text"
+              maxLength="200"
+              name="Title"
+              value={formData.Title}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Військове звання</Form.Label>
             <Form.Select name="Rank" value={formData.Rank} onChange={handleChange} required>
               {ranks.map((rank, id) => <option className='select-option' value={rank.id} key={id}>{rank.value}</option> )}
             </Form.Select>

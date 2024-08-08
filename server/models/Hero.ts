@@ -41,6 +41,11 @@ Hero.init(
     Photo: {
       type: new DataTypes.BLOB('medium'),
       allowNull: false
+    },
+    Title : {
+      type: new DataTypes.STRING,
+      allowNull: true,
+      defaultValue: ''
     }
   },
   {

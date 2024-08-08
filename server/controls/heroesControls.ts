@@ -9,6 +9,7 @@ export interface HeroData {
   Reward: string;
   Position: string;
   Photo: Buffer;
+  Title: string;
 }
 
 export async function addHero(data: HeroData) {
@@ -53,7 +54,7 @@ export async function updateHero(data: HeroData) {
 export async function getHeroes(): Promise<HeroData[]> {
   try {
     const heroes = await Hero.findAll({attributes: ['Order', 'Photo']});
-
+    
     if (!heroes) {
       return [] as HeroData[];
     }

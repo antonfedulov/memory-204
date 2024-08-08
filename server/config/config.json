@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "captain",
+    "password": "Memory204!",
+    "database": "memory_db",
+    "host": "185.65.247.78",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "captain",
+    "password": "Memory204!",
+    "database": "memory_db",
+    "host": "185.65.247.78",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "captain",
+    "password": "Memory204!",
+    "database": "memory_db",
+    "host": "185.65.247.78",
+    "dialect": "mysql"
+  }
+}
